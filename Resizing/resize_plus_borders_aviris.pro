@@ -169,7 +169,7 @@ PRO resize_plus_borders_aviris
           for i = 0, nbBase-1 do begin          
             
             ;Get Data from new image
-            newImageData = ENVI_GET_DATA(FID = fidRaster,DIMS = dimOutRaster,POS = i)
+            newImageData = ENVI_GET_DATA(FID = fidOutRaster,DIMS = dimOutRaster,POS = i)
 
             ;Assign Data to new array
             outImage[startImageSample:endImageSample,startImageLine:endImageLine,i] = newImageData
