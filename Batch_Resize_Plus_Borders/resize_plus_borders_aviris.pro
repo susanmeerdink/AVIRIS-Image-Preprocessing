@@ -1,5 +1,16 @@
 PRO resize_plus_borders_aviris
-
+  ; Created for images from the HyspIRI campaign (same area flown three times in 2013 and 2014).
+  ; Images must have same number of bands and be in zero rotation (aka North to South - NO angle).
+  ;This file loops through folders that contain files for a specific flightline from multiple dates.
+  ;The goal of this code is to read in a base file that has been cropped to the study area of choice for each flightline folder (FL01, FL02, etc).
+  ;The code will crop all other files for that specific flightline to the study area of interested (covered in the base file).
+  ;The code will add a 10 sample/line border to all sides the flightline that has a value of zero. 
+  ;The resulting files will be a BSQ image that has the same number of samples and lines for all files in the flightline folder.
+  ;This code outputs images that will be inputs for Alex Koltunov's Image to Image Registration code.
+  ; Susan Meerdink
+  ; Created 4/25/2016
+  ; 
+  ; --------------------------------------------------------------------------------------------------------------------------
   ;Start up ENVI
   COMPILE_OPT STRICTARR
   envi, /restore_base_save_files
