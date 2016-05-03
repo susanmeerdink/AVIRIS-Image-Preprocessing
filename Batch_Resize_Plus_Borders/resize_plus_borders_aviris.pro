@@ -1,6 +1,6 @@
 PRO resize_plus_borders_aviris
-  ; Created for images from the HyspIRI campaign (same area flown three times in 2013 and 2014).
-  ; Images must have same number of bands and be in zero rotation (aka North to South - NO angle).
+  ;Created for images from the HyspIRI campaign (same area flown three times in 2013 and 2014).
+  ;Images must have same number of bands and be in zero rotation (aka North to South - NO angle).
   ;This file loops through folders that contain files for a specific flightline from multiple dates.
   ;The goal of this code is to read in a base file that has been cropped to the study area of choice for each flightline folder (FL01, FL02, etc).
   ;The code will crop all other files for that specific flightline to the study area of interested (covered in the base file).
@@ -20,8 +20,6 @@ PRO resize_plus_borders_aviris
   pre_path = 'R:\users\susan.meerdink\Testing_Imagery_Folder\'
   ;remove for resampled
   mid_path='AVIRIS\'
-  ;value for pixels without data
-  border_value = 0
   ;search term to identify base image (and base image only!) could be worked
   ;into next for loop if different terms apply for different FL boxes needs to have a .dat or other file extension in the search term
   ; or the base file needs to be modified with a string split to ignore the .hdr file
