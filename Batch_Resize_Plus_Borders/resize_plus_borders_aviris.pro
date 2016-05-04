@@ -132,7 +132,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
       
       ;;; GET DATA & ASSIGN TO RESIZED IMAGE ;;; 
       outImage = 0 ;This is for memory purposes
-      outImage = MAKE_ARRAY([(base_samples+20), base_bands, (base_lines+20)], TYPE = raster_data_type, VALUE = 0) ;Create empty array for output image
+      outImage = MAKE_ARRAY([(base_samples+20), raster_bands, (base_lines+20)], TYPE = raster_data_type, VALUE = 0) ;Create empty array for output image
       zerosFront = MAKE_ARRAY(10 + offsetSampleStart,raster_bands, VALUE = 0) ;Place holders for beginning of line
       zerosEnd = MAKE_ARRAY(10 + offsetSampleEnd, raster_bands, VALUE = 0) ;Place holders for end of line
       countLine = 9 ;Counter for array assignment in loop (skips first 10 lines for header)
@@ -158,7 +158,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
       fileOutputTemp = raster_file_name + 'Temp' ;Set file name for new BSQ image
       ENVI_WRITE_ENVI_FILE, outImage, $ ; Data to write to file
         OUT_NAME = fileOutputTemp, $ ;Output file name
-        NB = base_bands, $; Number of Bands
+        NB = raster_bands, $; Number of Bands
         NL = base_lines + 20, $ ;Number of lines
         NS = base_samples + 20, $ ;Number of Samples
         INTERLEAVE = 1 , $ ;Set this keyword to one of the following integer values to specify the interleave output: 0: BSQ 1: BIL 2: BIP
