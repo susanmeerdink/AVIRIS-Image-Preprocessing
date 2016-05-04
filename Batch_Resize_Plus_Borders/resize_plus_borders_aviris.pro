@@ -112,7 +112,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
       endif
       endSample = (base_samples - 1) + upperCoordX ;Set the sample number to end with
       offsetSampleEnd = 0 ; set the default offset to zero
-      if endSample GT raster_samples then begin ;If the sample to end with is found off the image
+      if endSample GT (raster_samples - 1) then begin ;If the sample to end with is found off the image
         offsetSampleEnd =  endSample - raster_samples
         endSample = (raster_samples - 1) ; Set the last sample to the image
       endif
