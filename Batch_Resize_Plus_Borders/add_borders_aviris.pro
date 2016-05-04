@@ -11,7 +11,6 @@ PRO add_borders_aviris
 ; --------------------------------------------------------------------------------------------------------------------------
 ;;; INPUTS ;;;
 main_path = 'R:\users\susan.meerdink\Add_Border_Images\' ; Set directory that holds all flightlines
-base_image_id ='*f140416*' ;search term to identify base image (and base image only!) 
 all_image_id = 'FL*' ;search term which needs to apply to all images in the file path you want co-registered
 flightbox_name = 'SB' ;Name of flightbox to be processed (SB for Santa Barbara, SN for Sierra Nevada) 
 ;;; INPUTS DONE ;;
