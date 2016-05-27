@@ -135,7 +135,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
       outImage = MAKE_ARRAY([(base_samples+20), raster_bands, (base_lines+20)], TYPE = raster_data_type, VALUE = 0) ;Create empty array for output image
       zerosFront = MAKE_ARRAY(10 + offsetSampleStart,raster_bands, VALUE = 0) ;Place holders for beginning of line
       zerosEnd = MAKE_ARRAY(10 + offsetSampleEnd, raster_bands, VALUE = 0) ;Place holders for end of line
-      countLine = 9 ;Counter for array assignment in loop (skips first 10 lines for header)
+      countLine = 9 +offsetLineStart;Counter for array assignment in loop (skips first 10 lines for header)
       print,'Assigning Data: ' + single_image
       
       FOR i = startLine, endLine DO BEGIN ;Loop through lines of image
