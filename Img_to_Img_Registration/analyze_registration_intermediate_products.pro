@@ -3,9 +3,9 @@ PRO analyze_registration_intermediate_products
 ;6/2/106
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-origFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL4\AVIRIS\'
-affineFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL4\AVIRIS_registered_best_affine_2016-05-31_1012\'
-linearFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL4\AVIRIS_registered_best_linear_2016-06-01_1630\'
+origFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL1\AVIRIS\'
+affineFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL1\AVIRIS_registered_best_affine_2016-05-31_0956\'
+linearFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL1\AVIRIS_registered_best_linear_2016-06-02_0827\'
 
 ;read in control file information
 cfile = 'H:\users\meerdink\GitHub\AVIRIS-Image-Preprocessing\Img_to_Img_Registration\ControlFile.txt'
@@ -13,10 +13,11 @@ openu,1,cfile
 readf,1,dateIndex,bandIndex
 
 ;Set some variables for displaying
-dates = ['130411','130606','131125','140606','140829']
+;dates = ['130411','130606','131125','140606','140829'] ;This may have to change based on which dates are available
+dates = ['130411','130606','131125','140829'] ;For FL1
 channels = [25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,104,117,120,130,140,150,190,195,200,205,210,220]
 dateString = dates[dateIndex]
-origIndex = channels[bandIndex]
+origIndex = channels[bandIndex]-1
 
 ;Find and open original/base file
 origFile = FILE_SEARCH(origFolder,'*FL00*')
