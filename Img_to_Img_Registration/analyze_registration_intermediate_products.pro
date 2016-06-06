@@ -62,6 +62,7 @@ ENVI_DISPLAY_BANDS, linearFID, bandIndex,$ ;POS = channelCurrent ;one- or three-
   ZOOM_SIZE = zoomSize, $ ;keyword to specify a two-element array of long integers representing the x and y size in screen pixels
   /NEW ;/NEW ;Set this keyword to create a new display group.
   
+print,'Loaded Band ' + STRING(channels[bandIndex]) + ' for date ' + dateString
 
 ;Set next date and channel
 ; 28 total channels
@@ -76,7 +77,6 @@ if dateIndex GT 4 then begin
   dateIndex = 0
   bandIndex = 0
 endif
-print,'Loaded Band ' + STRING(channels[bandIndex]) + ' for date ' + dateString
 
 ;Write values to file
 close, 1
