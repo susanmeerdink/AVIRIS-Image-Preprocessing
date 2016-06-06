@@ -16,6 +16,7 @@ readf,1,dateIndex,bandIndex
 dates = ['130411','130606','131125','140606','140829']
 channels = [25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,104,117,120,130,140,150,190,195,200,205,210,220]
 dateString = dates[dateIndex]
+origIndex = channels[bandIndex]
 
 ;Find and open original/base file
 origFile = FILE_SEARCH(origFolder,'*FL00*')
@@ -43,7 +44,7 @@ imgSize = [dimensions[0]/3,dimensions[1]/2]
 zoomSize = [dimensions[0]/3.5,dimensions[1]/4]
 
 ;Display Bands  
-ENVI_DISPLAY_BANDS, origFID, bandIndex, $ ;POS = channelCurrent ;one- or three-element array of long integers representing band positions
+ENVI_DISPLAY_BANDS, origFID, origIndex, $ ;POS = channelCurrent ;one- or three-element array of long integers representing band positions
   IMAGE_SIZE = imgSize,$ ;keyword to specify a two-element array of long integers representing the x and y size in screen pixels
   IMAGE_OFFSET = [0,0],$ ;keyword to specify a two-element array of long integers representing the x and y offset in screen pixels
   ZOOM_FACTOR = 10, $ ;keyword to specify the initial zoom factor for the Zoom window.
