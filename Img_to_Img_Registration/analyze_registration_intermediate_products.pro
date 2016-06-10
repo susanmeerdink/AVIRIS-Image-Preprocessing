@@ -1,11 +1,15 @@
 PRO analyze_registration_intermediate_products
+;This code helps visualize the intermediate products of Zach Tane and Alex koltunov's code.
+;Zach does a run through of all the images and outputs two images using two methods (affine and linear).
+;The user needs to go through band by band and compare these two methods
+;Ultimately the user will choose which band and method produces an image that is the closest to the base image.
 ;susan meerdink
 ;6/2/106
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-origFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL5\AVIRIS\'
-affineFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL5\AVIRIS_registered_best_affine_2016-05-31_1012\'
-linearFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL5\AVIRIS_registered_best_linear_2016-06-01_1630\'
+origFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL1\AVIRIS\'
+affineFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL1\AVIRIS_registered_best_affine_2016-05-31_0956\'
+linearFolder = 'H:\users\meerdink\Image_to_Image_Registration\SB_FL1\AVIRIS_registered_best_linear_2016-06-02_0827\'
 
 ;read in control file information
 cfile = 'H:\users\meerdink\GitHub\AVIRIS-Image-Preprocessing\Img_to_Img_Registration\ControlFile.txt'
@@ -14,15 +18,20 @@ readf,1,dateIndex,bandIndex
 
 ;Set some variables for displaying
 ;dates = ['130411','130606','131125','140606','140829'] ;This may have to change based on which dates are available
-;dates = ['130411','130606','131125','140829'] ;For FL1
+dates = ['130411','130606','131125','140829'] ;For FL1 & FL6
 ;dates = ['130411','130606','131125','131204','140606','140829'] ;For FL3
-dates = ['130411','130606','131204','140606','140829'] ;For FL5
+;dates = ['130411','130606','131204','140606','140829'] ;For FL5
+;dates = ['130411','130606','131125','140604','140829'] ;For FL7
+;dates = ['130411','130606','131125','131204','140604','140606','140829'] ;For FL8 
+;dates = ['130411','131125','131204','140604','140829'] ; For FL10
+;dates = ['130411','130606','131125','131204','140606','140829'] ;For FL11
 channels = [25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,104,117,120,130,140,150,190,195,200,205,210,220]
 dateString = dates[dateIndex]
 origIndex = channels[bandIndex]-1
 
 ;Find and open original/base file
-origFile = FILE_SEARCH(origFolder,'*FL00*')
+origFile = FILE_SEARCH(origFolder,'*FL00*') ; For FL 1 -9
+;origFile = FILE_SEARCH(origFolder,'*FL01*') ; For FL 10 & 11
 ENVI_OPEN_FILE, origFile[0], R_FID = origFID
 
 ;Find and open affine file
