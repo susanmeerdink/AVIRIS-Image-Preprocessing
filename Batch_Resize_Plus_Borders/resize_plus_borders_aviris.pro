@@ -12,7 +12,7 @@ PRO resize_plus_borders_aviris
   ; 
   ; --------------------------------------------------------------------------------------------------------------------------
 ;;; INPUTS ;;;
-main_path = 'R:\users\susan.meerdink\Testing_Imagery_Folder\' ; Set directory that holds all flightlines
+main_path = 'R:\Image-To-Image Registration\' ; Set directory that holds all flightlines
 base_image_id ='*f140416*' ;search term to identify base image (and base image only!) 
 all_image_id = 'FL*' ;search term which needs to apply to all images in the file path you want co-registered
 flightbox_name = 'SB' ;Name of flightbox to be processed (SB for Santa Barbara, SN for Sierra Nevada) 
@@ -42,7 +42,7 @@ ENVI_BATCH_INIT ;Doesn't require having ENVI open - use with stand alone IDL 64 
 ;endfor
 
 ;; OPTION 2 - Only one flightline folder
-flightline_name = '03' ;Set the single flightline you want to process (make sure to add 0 in front of flightlines under 10)
+flightline_name = '10_Fix' ;Set the single flightline you want to process (make sure to add 0 in front of flightlines under 10)
 fl_list = make_array(1,1,/string);Make array that only holds one flightline name
 fl_list[0,0] = STRCOMPRESS(flightbox_name + '_FL' + flightline_name,/REMOVE_all) ;Add flightline name to list
 ;;; DONE SETTING UP FLIGHTLINE FOLDERS ;;;
@@ -125,7 +125,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
         startLine = 0 ;Set the first line to the input image
       endif
       endLine = (base_lines - 1) + upperCoordY ;Set the line number to end with
-      if endLine GT raster_lines then begin ;If this line is found off the image
+      if endLine GT (raster_lines -1) then begin ;If this line is found off the image
         endLine = (raster_lines - 1) ;set it to the last sample found in the image
       endif
       ;;; DONE FINDING RESIZE COORDINATES ;;;
@@ -135,7 +135,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
       outImage = MAKE_ARRAY([(base_samples+20), raster_bands, (base_lines+20)], TYPE = raster_data_type, VALUE = 0) ;Create empty array for output image
       zerosFront = MAKE_ARRAY(10 + offsetSampleStart,raster_bands, VALUE = 0) ;Place holders for beginning of line
       zerosEnd = MAKE_ARRAY(10 + offsetSampleEnd, raster_bands, VALUE = 0) ;Place holders for end of line
-      countLine = 9 +offsetLineStart;Counter for array assignment in loop (skips first 10 lines for header)
+      countLine = 9 + offsetLineStart;Counter for array assignment in loop (skips first 10 lines for header)
       print,'Assigning Data: ' + single_image
       
       FOR i = startLine, endLine DO BEGIN ;Loop through lines of image
