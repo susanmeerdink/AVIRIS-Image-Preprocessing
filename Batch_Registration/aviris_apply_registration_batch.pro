@@ -30,7 +30,26 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   flightline_path = main_path + single_flightline + '\' ; Set path for flightline that is being processed
   cd, flightline_path ;Change Directory to flightline that is being processed
   gcpFile = file_search('*.pts') ;Get the GCPs for this flightline
-  READCOL,gcpFile,gcp,FORMAT = 'D,D,D,D',STRINGSKIP = ';',DELIMITER = string(9b) ;gcpXM,gcpYM,gcpXI,gcpYI,
+  OPENR, lun, gcpFile, /GET_LUN ;Open file and lun for future processing
+  ;READCOL,gcpFile,STRINGSKIP = ';',DELIMITER = string(9b),gcpXM ;,gcpYM,gcpXI,gcpYI
+  row = 0 ;To keep count of rows
+  gcp = read_ascii(gcpFile,Template = ASCII_TEMPLATE(gcpFile))
+  line1 = dblarr(1)
+  line2 = dblarr(1)
+  line3 = dblarr(1)
+  line4 = dblarr(1)
+  line = string(0)
+  WHILE NOT EOF(lun) DO BEGIN
+    print, EOF(lun)
+    IF row GT 5 THEN BEGIN     
+      READF, lun, line1, line2, line3, line4, FORMAT = '(F,F,F,F)'
+      print, line1 + ','+line2+','+line3+','+line4
+      gcp = [gcp, line]
+    ENDIF ELSE BEGIN
+      READF, lun, line, FORMAT ='(A)'
+    ENDELSE
+    row = row + 1 ;advance counter
+  ENDWHILE
   print, size(gcp)
   
   ;;; LOOPING THROUH OTHER IMAGES ;;;
