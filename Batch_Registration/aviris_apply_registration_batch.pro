@@ -14,12 +14,8 @@ ENVI_BATCH_INIT ;Doesn't require having ENVI open - use with stand alone IDL 64 
 ;;; INPUTS ;;;
 main_path = 'F:\Image-To-Image-Registration\AVIRIS\' ; Set directory that holds all flightlines
 ;fl_list = ['FL02','FL03','FL04','FL05','FL06','FL07','FL08','FL09','FL10','FL11'] ;Create the list of folders
-fl_list = ['FL02'] ;Create the list of folders
-basemap = 'F:\Imagery\NAIP Imagery\Santa Barbara\SBbox_18m_flightline_1_to_11_PA' ;Set to basemap for GCPs
-
-;;; ADDITIONAL VARIABLES FOR MEMORY PURPOSES ;;;
-outImage = MAKE_ARRAY([800, 250, 10000], TYPE = 2, VALUE = 0) ;Create empty array that is large for memory allocation purposes
-outImage = 0 ;Set to zero for memory purposes
+fl_list = ['FL07','FL08','FL09','FL10','FL11'] ;Create the list of folders
+basemap = 'C:\Users\Susan\Documents\Imagery\NAIP Imagery\Santa Barbara\SBbox_18m_flightline_1_to_11_PA' ;Set to basemap for GCPs
 
 ;;; OPEN BASEFILE
 ENVI_open_file, basemap, R_FID = fidBase ;Open the file
@@ -45,7 +41,6 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   ;;; LOOPING THROUH OTHER IMAGES ;;;
   image_list = file_search('*_rot35') ;Get list of all images in flightline that have been rotated
   FOREACH single_image, image_list DO BEGIN ; Loop through all images for a single flightline
-    print, single_image
     IF strmatch(single_image,'*.hdr') EQ 0 THEN BEGIN ;If the file being processed isn't a header,text, or GCP file proceed
       ;;; BASIC FILE INFO ;;;
       print, 'Processing: ' + single_image
@@ -62,7 +57,9 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
         BBL = raster_bbl ;Bad Band List
       
       ;;; REGISTRATION ;;;
-      outputName = flightline_path + raster_file_name + '_Reg' ;Set output name for registration image
+      I = strpos(raster_file_name,'rot35')
+      strput,raster_file_name,'Regis',I
+      outputName = flightline_path + raster_file_name;Set output name for registration image
       ENVI_DOIT,'ENVI_REGISTER_DOIT', $
         B_FID = fidBase, $ ;keyword to specify the file ID for the base file
         PTS = gcpFormat, $ ; keyword to specify an array of double-precision values representing the x and y positions of the base and warp tie points
