@@ -53,6 +53,9 @@ NOTES:
 
 ## Rotate 35 Degrees
 This code uses new ENVI (NOT CLASSIC)
+Code is not working! 
+Get error: POLY_2D: Expression must be an array in this context: I.
+Rotating images using ENVI Queue Manager
 
 ## Apply Spectral Correction & Update Metadata
 * Atmospheric correction on AVIRIS images varies quite a bit from date to date for the HyspIRI Airborne Campaign. Using the Storke Post Office ASD spectra and spectra from FL06 across all dates, I have derived a multiplying factor for each date to correct for spectral differences. See file Determining AVIRIS Correction Factors.xlsx for calculations 
