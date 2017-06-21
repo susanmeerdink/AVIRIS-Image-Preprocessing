@@ -27,7 +27,7 @@ FOR i = 2,number_of_flightlines,1 DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   endif else begin ;Unless it's 10 or Greater (don't add zero in front)
     stri = string(i)
   endelse
-  single_flightline = file_search('FL' + stri)
+  single_flightline = STRCOMPRESS('FL' + stri,/REMOVE_ALL)
   print, 'Starting with ' + single_flightline ;Print which flightline is being processed
   flightline_path = main_path + single_flightline + '\0 - Original Files\'  ; Set path for flightline that is being processed
   cd, flightline_path ;Change Directory to flightline that is being processed
