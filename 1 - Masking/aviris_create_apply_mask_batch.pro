@@ -15,21 +15,21 @@ COMPILE_OPT IDL2
 e = ENVI(/HEADLESS)
 
 ;;; INPUTS ;;;
-main_path = 'R:\Image-To-Image Registration\' ; Set directory that holds all flightlines 
-all_image_id = '*_ResizePlusBorder*' ;search term which needs to apply to all images in the file path you want co-registered
-number_of_flightlines = 11 ;total number of flightlines in flightbox (Santa Barbara has 11 flightlines) 
+main_path = 'D:\Imagery\AVIRIS\' ; Set directory that holds all flightlines 
+all_image_id = '*_corr_018m*' ;search term which needs to apply to all images in the file path you want co-registered
+number_of_flightlines = 3 ;total number of flightlines in flightbox (Santa Barbara has 11 flightlines) 
 ;;; INPUTS DONE ;;
 
 ;;; PROCESSING ;;;
-FOR i = 1,number_of_flightlines,1 DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
+FOR i = 2,number_of_flightlines,1 DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   if (i LT 10) then begin ;Add zero in front of number/counter
     stri = string(0) + string(i)
   endif else begin ;Unless it's 10 or Greater (don't add zero in front)
     stri = string(i)
   endelse
-  single_flightline = file_search('FL' + stri)
+  single_flightline = STRCOMPRESS('FL' + stri,/REMOVE_ALL)
   print, 'Starting with ' + single_flightline ;Print which flightline is being processed
-  flightline_path = main_path + single_flightline + '\AVIRIS\'  ; Set path for flightline that is being processed
+  flightline_path = main_path + single_flightline + '\0 - Original Files\'  ; Set path for flightline that is being processed
   cd, flightline_path ;Change Directory to flightline that is being processed
   
   ;;; LOOPING THROUH OTHER IMAGES ;;;
