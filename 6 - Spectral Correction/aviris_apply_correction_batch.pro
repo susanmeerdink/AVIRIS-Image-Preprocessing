@@ -17,7 +17,7 @@ ENVI_BATCH_INIT ;Doesn't require having ENVI open - use with stand alone IDL 64 
 ;;; INPUTS ;;;
 main_path = 'F:\Image-To-Image-Registration\AVIRIS\' ; Set directory that holds all flightlines
 ;fl_list = ['FL02','FL03','FL04','FL05','FL06','FL07','FL08','FL09','FL10','FL11'] ;Create the list of folders
-fl_list = ['FL02'] ;Create the list of folders
+fl_list = ['FL04'] ;Create the list of folders
 
 ;;; ADDITIONAL VARIABLES ;;;
 badbandList = [0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0]
@@ -38,7 +38,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   cd, flightline_path ;Change Directory to flightline that is being processed
   
   ;;; LOOPING THROUH OTHER IMAGES ;;;
-  image_list = file_search('*_reg') ;Get list of all images in flightline that have been rotated
+  image_list = file_search('*_Regis') ;Get list of all images in flightline that have been rotated
   FOREACH single_image, image_list DO BEGIN ; Loop through all images for a single flightline
     IF strmatch(single_image,'*.hdr') EQ 0 THEN BEGIN ;If the file being processed isn't a header,text, or GCP file proceed
       ;;; BASIC FILE INFO ;;;
@@ -71,6 +71,9 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
       ENDIF
       IF strmatch(single_image,'*f140416*') EQ 1 THEN BEGIN
         factor = cor140416
+      ENDIF
+      IF strmatch(single_image,'*f140604*') EQ 1 THEN BEGIN
+        factor = cor140606
       ENDIF
       IF strmatch(single_image,'*f140606*') EQ 1 THEN BEGIN
         factor = cor140606

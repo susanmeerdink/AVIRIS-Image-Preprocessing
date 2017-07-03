@@ -14,7 +14,7 @@ ENVI_BATCH_INIT ;Doesn't require having ENVI open - use with stand alone IDL 64 
 ;;; INPUTS ;;;
 main_path = 'F:\Image-To-Image-Registration\AVIRIS\' ; Set directory that holds all flightlines
 ;fl_list = ['FL02','FL03','FL04','FL05','FL06','FL07','FL08','FL09','FL10','FL11'] ;Create the list of folders
-fl_list = ['FL07','FL08','FL09','FL10','FL11'] ;Create the list of folders
+fl_list = ['FL08','FL09','FL10','FL11'] ;Create the list of folders
 basemap = 'C:\Users\Susan\Documents\Imagery\NAIP Imagery\Santa Barbara\SBbox_18m_flightline_1_to_11_PA' ;Set to basemap for GCPs
 
 ;;; OPEN BASEFILE
@@ -29,7 +29,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   ;; SETTING UP GCP File ;;
   gcpFile = file_search('*.pts') ;Get the GCPs for this flightline
 ;  gcp = read_ascii(gcpFile,TEMPLATE = ASCII_TEMPLATE(gcpFile)) ; opens prompt to load in ascii file. Skip to line 6, separate via white space, and have four separate fields
-  RESTORE,'C:\Users\Susan\Documents\GitHub\AVIRIS-Image-Preprocessing\Batch_Registration\gcpTemplate.sav' ;load in saved template
+  RESTORE,'C:\Users\Susan\Documents\GitHub\AVIRIS-Image-Preprocessing\5 - Register Images\gcpTemplate.sav' ;load in saved template
   gcp = read_ascii(gcpFile,TEMPLATE = gcpTemplate) ; opens prompt to load in ascii file. Skip to line 6, separate via white space, and have four separate fields
   numPts = size(gcp.XMap,/N_ELEMENTS); Get the number of points/rows
   gcpFormat = dblarr(4,numPts )
