@@ -75,7 +75,7 @@ FOREACH single_flightline, fl_list DO BEGIN ;;; LOOP THROUGH FLIGHTLINES ;;;
   ;;; LOOPING THROUH OTHER IMAGES ;;;
   image_list = file_search(all_image_id) ;Get list of all files in flightline
   FOREACH single_image, image_list DO BEGIN ; Loop through all images for a single flightline
-    IF strmatch(single_image,'*.hdr') EQ 0 THEN BEGIN ;If the file being processed isn't a header file proceed
+    IF strmatch(single_image,'*.hdr') EQ 0 AND strmatch(single_image,base_image_id) EQ 0 THEN BEGIN ;If the file being processed isn't a header file proceed
       ;;; BASIC FILE INFO ;;;
       print, 'Processing: ' + single_image 
       ENVI_open_file, single_image, R_FID = fidRaster ;Open the file
