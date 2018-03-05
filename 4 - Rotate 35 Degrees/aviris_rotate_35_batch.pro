@@ -3,6 +3,8 @@ PRO aviris_rotate_35_batch
 ;USED NEW ENVI ( not classic )
 ;Susan Meerdink
 ;3/13/17
+;NOTE!!!! This code crashes when trying to get data from AVIRIS image. Works on smaller images, 
+;but for these large images I have had to rotate using ENVI Queue Manager
 ;----------------------------------------------------------------------
 
 ;;; SETTING UP ENVI/IDL ENVIRONMENT ;;;
